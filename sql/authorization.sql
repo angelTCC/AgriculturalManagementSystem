@@ -2,7 +2,7 @@
 DROP ROLE IF EXISTS admin, owner, worker, auditor;
 
 -- Create roles
-CREATE ROLE admin WITH LOGIN PASSWORD 'admin_password' SUPERUSER;
+CREATE ROLE admin_farm WITH LOGIN PASSWORD 'admin_password' SUPERUSER;
 CREATE ROLE owner WITH LOGIN PASSWORD 'owner_password';
 CREATE ROLE worker WITH LOGIN PASSWORD 'worker_password';
 CREATE ROLE auditor WITH LOGIN PASSWORD 'auditor_password';
@@ -16,12 +16,6 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO auditor;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO owner;
 
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-GRANT SELECT, INSERT, UPDATE ON crops, irrigation, fertilization, sensor_data TO worker;
-
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-GRANT SELECT ON TABLES TO auditor;
-
 -- Revoke public access for security
 REVOKE ALL ON ALL TABLES IN SCHEMA public FROM public;
 
@@ -34,10 +28,7 @@ CREATE USER test_worker WITH PASSWORD 'test_worker_pass';
 CREATE USER test_auditor WITH PASSWORD 'test_auditor_pass';
 
 -- Assign roles to users
-GRANT admin TO test_admin;
+GRANT admin_farm TO test_admin;
 GRANT owner TO test_owner;
 GRANT worker TO test_worker;
 GRANT auditor TO test_auditor;
-
-
-psql -U postgres -d farm_management -f ./sql/roles_privileges.sql -h 127.0.0.1 -W
