@@ -1,140 +1,59 @@
 # Agricultural Management System 🌱
 
-A smart **agriculture management system** using **PostgreSQL** and **Django** to efficiently track farms, crops, sensors, and transactions.
+A smart **Agricultural Management System** built with **PostgreSQL** and **Flask** to efficiently manage and track farms, crops, sensors, and transactions. This system aims to streamline agricultural operations through structured data management and role-based access control.
 
 ## 🚀 Project Overview
-For years, AgriTech Solutions, a mid-sized agricultural management company, has relied on spreadsheets and CSV files to track farm operations. Initially, this method worked well for managing field data, crop cycles, and financial transactions. However, as the company expanded, inefficiencies in data handling became evident.
 
-Farm managers often struggled with inconsistent records, duplicated data, and difficulties in accessing information quickly. Employees had to manually consolidate reports from multiple spreadsheets, a time-consuming process prone to human error. The company also began adopting IoT sensors to monitor environmental factors such as soil moisture, temperature, and humidity, but integrating this data into their existing workflow proved challenging.
+### Context:
+AgriTech Solutions, a mid-sized agricultural management company, faced challenges managing farm operations through spreadsheets and CSV files. As the company grew, data inconsistencies, duplicated records, and inefficient workflows became significant hurdles. The company also began adopting IoT sensors for monitoring environmental factors like soil moisture, temperature, and humidity, but integrating this data into their workflow proved difficult.
 
-Recognizing these limitations, the company decided to transition to a structured database system. Their goals were clear:
-
-1. **Data Centralization**: Migrating all historical data from CSV files into a robust PostgreSQL database.
-2. **User Roles & Permissions**: Implementing a role-based access control (RBAC) system to manage data securely.
-3. **Query Optimization**: Enhancing performance by reducing query execution time.
-4. **Comprehensive Documentation**: Ensuring all database structures and scripts are well-documented and replicable.
+### Goals:
+The company transitioned to a structured database system with the following objectives:
+1. **Centralized Data Management**: Migrate all historical data from CSV files to a robust PostgreSQL database.
+2. **Role-Based Access Control (RBAC)**: Implement user roles with specific privileges to secure data.
+3. **Comprehensive Documentation**: Ensure all database structures, scripts, and processes are well-documented and replicable.
 
 ### Approach:
-- Designed the **database schema** using **draw.io**.
-- Implemented the schema in **PostgreSQL**, creating tables, relationships, and constraints.
-- Imported existing data from CSV files and used **Python's Faker library** to generate synthetic data for testing.
-- Focused on **query optimization**, indexing, and improving database performance.
-- Established **user roles and privileges** to maintain data security and integrity.
+- Designed and implemented a **relational database schema** in PostgreSQL, ensuring data integrity through tables, relationships, and constraints.
+- Migrated data from CSV files and utilized **Python’s Faker library** to generate synthetic test data.
+- Established a **role-based access control system** to ensure secure management of users and their respective permissions.
 
-## 🛠️ Tech Stack
-- **Database:** PostgreSQL
-- **Backend:** Django, Python
-- **Data Handling:** Pandas, Faker (for synthetic data generation)
-- **Containerization:** Docker, Docker Compose
-- **Visualization & Documentation:** Draw.io, Markdown
+## 💡 Database Schema
+The system uses a relational database with key tables, including:
 
-## 📌 Features
-- 🌾 Manage farms, fields, and crops.
-- 🚜 Track irrigation and fertilization activities.
-- 💰 Record financial transactions.
-- 🛁 Store environmental sensor data (humidity, temperature, soil moisture, etc.).
-- 🔍 Optimize performance with **indexing and query optimization**.
-- 🔑 Secure role-based access control (RBAC).
-
-## 💊 Database Schema
-The system utilizes a **relational database** with the following key tables:
 - **Users**: Manages farm owners, workers, and auditors.
-- **Farms**: Stores details about different farms.
+- **Farms**: Stores farm-related information.
 - **Fields**: Represents specific field divisions within farms.
-- **Crops**: Tracks planting, growth, and harvesting.
+- **Crops**: Tracks planting, growth, and harvesting data.
 - **Irrigation**: Logs irrigation schedules and details.
 - **Fertilization**: Records fertilizer applications.
-- **Transactions**: Stores financial records.
-- **Sensor Data**: Stores environmental sensor readings.
+- **Transactions**: Stores financial transaction records.
+- **Sensor Data**: Stores environmental data from IoT sensors.
 
-📚 **[View Full Database Documentation](docs/database_schema.md)**  
-📚 **[Schema Diagram (draw.io)](https://drive.google.com/file/d/1mV3-faYCJ_EjsKRXoJhrw-YT_99Kelk7/view?usp=sharing)**
-
-## 🔹 User Roles & Permissions
-The database includes a **role-based access control system** to manage permissions effectively.
+## 🔐 User Roles & Permissions
+The database includes a **role-based access control (RBAC)** system to manage user permissions efficiently.
 
 | Privilege           | Admin | Owner | Worker (Limited) | Auditor |
-|---------------------|:-----:|:-----:|:---------------:|:-------:|
-| CREATE TABLE       | ✅    | ❌    | ❌              | ❌      |
-| DROP TABLE         | ✅    | ❌    | ❌              | ❌      |
-| INSERT DATA        | ✅    | ✅    | ✅              | ❌      |
-| UPDATE DATA        | ✅    | ✅    | ✅              | ❌      |
-| DELETE DATA        | ✅    | ✅    | ❌              | ❌      |
-| SELECT DATA        | ✅    | ✅    | ✅              | ✅      |
-| ALTER TABLE        | ✅    | ❌    | ❌              | ❌      |
-| MANAGE USERS       | ✅    | ✅    | ❌              | ❌      |
+|---------------------|:-----:|:-----:|:----------------:|:-------:|
+| CREATE TABLE        | ✅    | ❌    | ❌               | ❌      |
+| DROP TABLE          | ✅    | ❌    | ❌               | ❌      |
+| INSERT DATA         | ✅    | ✅    | ✅               | ❌      |
+| UPDATE DATA         | ✅    | ✅    | ✅               | ❌      |
+| DELETE DATA         | ✅    | ✅    | ❌               | ❌      |
+| SELECT DATA         | ✅    | ✅    | ✅               | ✅      |
+| ALTER TABLE         | ✅    | ❌    | ❌               | ❌      |
+| MANAGE USERS        | ✅    | ✅    | ❌               | ❌      |
 
-**Roles & Permissions:**
+**Role Definitions**:
 - **Admin**: Full control over the database (superuser).
-- **Owner**: Full CRUD (Create, Read, Update, Delete) access.
-- **Worker**: Limited permissions (Read, Insert, and Update for specific tables).
-- **Auditor**: Read-only access to all tables.
+- **Owner**: Full CRUD (Create, Read, Update, Delete) access to system data.
+- **Worker**: Limited access (Read, Insert, and Update for specific tables).
+- **Auditor**: Read-only access to all system data.
 
-## 👅 Setup & Installation
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/AgriDataHub.git  
-cd AgriDataHub
+## 🛠️ Setup and Installation
+For detailed instructions on setting up the project, refer to the [setup guide](docs/setup_guide.md).
 
-# Start PostgreSQL and create the database
-psql -U your_user -d your_db -f sql/schema.sql
-```
-
-## 🐢 Deployment (Using Docker)
-```bash
-# Build and start the PostgreSQL container
-docker-compose up -d
-
-# Apply migrations (if using Django ORM)
-python manage.py migrate
-```
-
-## 📂 Project Structure
-```
-AgriDataHub/  
-│── sql/  
-│   ├── schema.sql          # Tables, constraints, indexes, views  
-│   ├── triggers.sql        # Triggers for automation  
-│   ├── transactions.sql    # Example transactions  
-│   ├── seed_data.sql       # Initial data for testing  
-│   ├── queries.sql         # Sample queries (reports, analytics, etc.)  
-│   ├── authorization.sql   # User roles & permissions  
-│  
-│── docs/  
-│   ├── ERD.png             # Entity-Relationship Diagram  
-│   ├── api_docs.md         # API documentation  
-│   ├── setup.md            # How to set up the project  
-│  
-│── .gitignore  
-│── README.md  
-│── requirements.txt        # Python dependencies  
-│── docker-compose.yml      # Optional: PostgreSQL container  
-│── manage.py  
-```
-
-## 📊 Example Queries (Optimized)
-```sql
--- Retrieve all crops for a specific farm with optimized indexing
-SELECT c.* FROM crops c
-JOIN fields f ON c.field_id = f.id
-JOIN farms fa ON f.farm_id = fa.id
-WHERE fa.name = 'Farm A';
-
--- Get total revenue for a farm
-SELECT SUM(amount) as total_revenue FROM transactions
-WHERE farm_id = (SELECT id FROM farms WHERE name = 'Farm A');
-```
-
----
-## 🤝 Contributing
-Contributions are welcome! Feel free to fork the repo and submit a pull request.
-
----
-## 🚀 Future Improvements
-- Implement **Django ORM** for better database interactions.
-- Integrate a **REST API** for seamless frontend-backend communication.
-- Improve **real-time analytics and reporting** features.
-
----
-Feel free to contribute or suggest improvements! 🎯
-
+## 🚧 Future Implementations
+In future iterations, the project will be expanded to include:
+- **Dockerization**: Containerize both the Flask API and PostgreSQL database for improved scalability and portability.
+- **Performance Optimization**: Implement query optimization strategies to enhance system efficiency.

@@ -70,12 +70,3 @@ CREATE TABLE sensor_data (
     value DECIMAL(10,2) NOT NULL,
     reading_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
--- INDEXES FOR PERFORMANCE
-CREATE INDEX idx_farm_user ON farms(user_id);
-CREATE INDEX idx_field_farm ON fields(farm_id);
-CREATE INDEX idx_crop_field ON crops(field_id);
-CREATE INDEX idx_irrigation_field ON irrigation(field_id);
-CREATE INDEX idx_fertilization_field ON fertilization(field_id);
-CREATE INDEX idx_transaction_farm ON transactions(farm_id);
-CREATE INDEX idx_sensor_field ON sensor_data(field_id);
